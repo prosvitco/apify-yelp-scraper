@@ -1,8 +1,11 @@
+const Apify = require('apify');
+
 const request = require('request-promise-native');
 const errors = require('request-promise/errors');
 const cheerio = require('cheerio');
 const extract = require('../src/extractors');
 const scrapers = require('../src/scrapers');
+const { log } = Apify.utils;
 
 const requestYelpSearch = async (url) => {
     try {
@@ -36,6 +39,11 @@ const requestYelpBusinessId = async (url) => {
             url,
             transform: body => cheerio.load(body),
         });
+
+        log.info(url);
+        log.info($);
+        log.info(JSON.stringify($));
+
         return extract.yelpBusinessInfo(url, $);
     } catch (err) {
         if (err instanceof errors.StatusCodeError) {
