@@ -69,8 +69,6 @@ const yelpBusinessPartial = ($) => {
     }
     catch { };
 
-    log.info( JSON.stringify(payload) );
-
     return {
         bizId: [...bizId.values()][0],
         name: get(payload, ['bizDetailsPageProps', 'businessName'], ''),
@@ -78,6 +76,9 @@ const yelpBusinessPartial = ($) => {
         phone: get(payload, ['bizDetailsPageProps', 'bizContactInfoProps', 'phoneNumber'], otherPhone),
         website,
         images: [],
+        historyText: get(payload, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps', 'historyText'], ''),
+        specialtiesText: get(payload, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps', 'specialtiesText'], ''),
+        businessOwner: get(payload, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps', 'businessOwner'], ''),
         directUrl,
     };
 };
