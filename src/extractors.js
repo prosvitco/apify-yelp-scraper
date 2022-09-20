@@ -1,6 +1,7 @@
 const { load } = require('cheerio');
 const { get, omit } = require('lodash');
 const { CATEGORIES, categorizeUrl, completeYelpUrl, BASE_URL } = require('./urls');
+const { log } = Apify.utils;
 
 /**
  * Generates an unique array with no empty items
