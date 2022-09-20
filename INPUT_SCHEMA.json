@@ -54,7 +54,7 @@
             "description": "How many reviews should be scraped per business",
             "editor": "number",
             "unit": "per business",
-            "prefill": 5,
+            "prefill": 0,
             "minimum": 0,
             "maximum": 999999
         },

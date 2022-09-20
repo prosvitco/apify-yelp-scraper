@@ -1,9 +1,6 @@
-const Apify = require('apify');
-
 const { load } = require('cheerio');
 const { get, omit } = require('lodash');
 const { CATEGORIES, categorizeUrl, completeYelpUrl, BASE_URL } = require('./urls');
-const { log } = Apify.utils;
 
 /**
  * Generates an unique array with no empty items
@@ -110,8 +107,6 @@ const yelpBusinessInfo = (json) => {
         ratings,
     ] = json;
 
-    log.info( JSON.stringify(get(info, 'data.business', null)) );
-
     return {
         address: {
             ...omit(get(info, 'data.business.location.address', {}), '__typename'),
@@ -124,34 +119,35 @@ const yelpBusinessInfo = (json) => {
         categories: uniqueNonEmpty(get(categories, 'data.business.categories[0].ancestry', []).map((category) => category.title)),
         aggregatedRating: get(ratings, 'data.business.rating', null),
         reviewCount: get(ratings, 'data.business.reviewCount', null),
+        about: get(info, 'data.business.description', null),
     };
 };
 
 const yelpBusinessReviews = ({ url, json, scrapeReviewerName, scrapeReviewerUrl }) => {
     const reviews = new Map();
-    // json.reviews.forEach((review) => {
-    //     if (!reviews.has(review.id)) {
-    //         const $ = load(review.comment.text.replace(/<br>/g, '\n'), { decodeEntities: true, normalizeWhitespace: true });
-    //         reviews.set(review.id, {
-    //             date: new Date(review.localizedDate).toISOString(),
-    //             rating: review.rating,
-    //             text: $('body')
-    //                 .map((i, s) => $(s).text())
-    //                 .get()
-    //                 .filter((s) => s)
-    //                 .join('\n'),
-    //             language: review.comment.language,
-    //             isFunnyCount: review.feedback.counts.funny,
-    //             isUsefulCount: review.feedback.counts.useful,
-    //             isCoolCount: review.feedback.counts.cool,
-    //             photoUrls: review.photos.map(((photo) => new URL(photo.src, url).toString().replace(/\/[^/]+.jpg/, '/o.jpg'))),
-    //             reviewerName: scrapeReviewerName ? review.user.markupDisplayName : null,
-    //             reviewerUrl: scrapeReviewerUrl ? `https://www.yelp.com/${review.user.userUrl}` : null,
-    //             reviewerReviewCount: review.user.reviewCount,
-    //             reviewerLocation: review.user.displayLocation,
-    //         });
-    //     }
-    // });
+    json.reviews.forEach((review) => {
+        if (!reviews.has(review.id)) {
+            const $ = load(review.comment.text.replace(/<br>/g, '\n'), { decodeEntities: true, normalizeWhitespace: true });
+            reviews.set(review.id, {
+                date: new Date(review.localizedDate).toISOString(),
+                rating: review.rating,
+                text: $('body')
+                    .map((i, s) => $(s).text())
+                    .get()
+                    .filter((s) => s)
+                    .join('\n'),
+                language: review.comment.language,
+                isFunnyCount: review.feedback.counts.funny,
+                isUsefulCount: review.feedback.counts.useful,
+                isCoolCount: review.feedback.counts.cool,
+                photoUrls: review.photos.map(((photo) => new URL(photo.src, url).toString().replace(/\/[^/]+.jpg/, '/o.jpg'))),
+                reviewerName: scrapeReviewerName ? review.user.markupDisplayName : null,
+                reviewerUrl: scrapeReviewerUrl ? `https://www.yelp.com/${review.user.userUrl}` : null,
+                reviewerReviewCount: review.user.reviewCount,
+                reviewerLocation: review.user.displayLocation,
+            });
+        }
+    });
 
     return [...reviews.values()];
 };
