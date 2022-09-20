@@ -119,7 +119,7 @@ const yelpBusinessInfo = (json) => {
         categories: uniqueNonEmpty(get(categories, 'data.business.categories[0].ancestry', []).map((category) => category.title)),
         aggregatedRating: get(ratings, 'data.business.rating', null),
         reviewCount: get(ratings, 'data.business.reviewCount', null),
-        about: get(info, 'data.business.description', null),
+        about: get(info, 'data.business', null),
     };
 };
 
