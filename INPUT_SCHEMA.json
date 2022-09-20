@@ -9,14 +9,14 @@
             "type": "array",
             "description": "Here you can provide a search queries for Yelp bussinesses to scrape. <br /><br /><strong>Choose either of 'Search Terms' or 'Direct URLs'.</strong>",
             "editor": "stringList",
-            "prefill": ["Chimney Sweep", "Gutter Installation", "Roof Installation", "Window Installation", "Roofing Contractors"]
+            "prefill": ["Roof repair"]
         },
         "locations": {
             "title": "Locations",
             "type": "array",
             "description": "Locations that will be searched for each search term.",
             "editor": "stringList",
-            "prefill": ["Los Angeles"]
+            "prefill": ["Aberdeen, WA"]
         },
         "searchLimit": {
             "title": "Search results limit",
