@@ -2,6 +2,9 @@ const { load } = require('cheerio');
 const { get, omit } = require('lodash');
 const { CATEGORIES, categorizeUrl, completeYelpUrl, BASE_URL } = require('./urls');
 
+const Apify = require('apify');
+const { log } = Apify.utils;
+
 /**
  * Generates an unique array with no empty items
  * @param {any[]} arr
@@ -67,6 +70,10 @@ const yelpBusinessPartial = ($) => {
         otherPhone = JSON.parse(`{${html.match(/"telephone":".+?"/)[0]}}`).telephone;
     }
     catch { };
+
+    console.log(payload);
+
+    log.info(JSON.stringify(get(payload, ['bizDetailsPageProps', 'fromTheBusinessProps'], [])));
 
     return {
         bizId: [...bizId.values()][0],
