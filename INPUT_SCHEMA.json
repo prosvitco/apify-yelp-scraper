@@ -16,7 +16,7 @@
             "type": "array",
             "description": "Locations that will be searched for each search term.",
             "editor": "stringList",
-            "prefill": ["New York", "Los Angeles"]
+            "prefill": ["Los Angeles"]
         },
         "searchLimit": {
             "title": "Search results limit",
