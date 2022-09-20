@@ -107,6 +107,8 @@ const yelpBusinessInfo = (json) => {
         ratings,
     ] = json;
 
+    log.info( get(info, 'data.business', null) );
+
     return {
         address: {
             ...omit(get(info, 'data.business.location.address', {}), '__typename'),
