@@ -1,0 +1,7 @@
+{
+	"name": "yelp",
+	"version": "1.0",
+	"buildTag": "latest",
+	"env": {},
+	"template": "apify_project"
+}
