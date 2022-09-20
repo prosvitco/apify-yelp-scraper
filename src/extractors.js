@@ -76,9 +76,7 @@ const yelpBusinessPartial = ($) => {
         phone: get(payload, ['bizDetailsPageProps', 'bizContactInfoProps', 'phoneNumber'], otherPhone),
         website,
         images: [],
-        historyText: get(payload, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps', 'historyText'], ''),
-        specialtiesText: get(payload, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps', 'specialtiesText'], ''),
-        businessOwner: get(payload, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps', 'businessOwner'], ''),
+        content: get(payload, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps'], []),
         directUrl,
     };
 };
