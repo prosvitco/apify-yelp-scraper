@@ -1,3 +1,5 @@
+const Apify = require('apify');
+
 const { load } = require('cheerio');
 const { get, omit } = require('lodash');
 const { CATEGORIES, categorizeUrl, completeYelpUrl, BASE_URL } = require('./urls');
