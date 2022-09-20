@@ -1,8 +1,6 @@
 const { load } = require('cheerio');
 const { get, omit } = require('lodash');
 const { CATEGORIES, categorizeUrl, completeYelpUrl, BASE_URL } = require('./urls');
-const Apify = require('apify');
-const { log } = Apify.utils;
 
 /**
  * Generates an unique array with no empty items
@@ -34,6 +32,7 @@ const yelpSearchResultUrls = (url, $) => {
  */
 const yelpBusinessPartial = ($) => {
     const bizId = new Set($("meta[name='yelp-biz-id']").map((_, el) => $(el).attr('content')).get());
+    const description = new Set($("meta[property='og:description']").map((_, el) => $(el).attr('content')).get());
 
     if (bizId.size === 0) {
         throw new Error('Page does not contain an Business Id');
@@ -76,7 +75,7 @@ const yelpBusinessPartial = ($) => {
         phone: get(payload, ['bizDetailsPageProps', 'bizContactInfoProps', 'phoneNumber'], otherPhone),
         website,
         images: [],
-        content: get(payload, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps'], []),
+        description: [...description.values()][0],
         directUrl,
     };
 };
