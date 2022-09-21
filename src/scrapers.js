@@ -113,6 +113,8 @@ const createYelpPageHandler = ({
             const { payload } = request.userData;
             const enrichedBusinessInfo = extract.yelpBusinessInfo(json);
 
+            console.log(`[GRAPHQL]: Handling business info page: ${request.url}`);
+
             // const followup = requests.yelpBusinessReview(payload.business.bizId, null, {
             //     ...request.userData.payload,
             //     business: nonDestructiveMerge([ request.userData.payload.business, enrichedBusinessInfo ]),
