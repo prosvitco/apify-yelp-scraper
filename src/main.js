@@ -45,7 +45,7 @@ Apify.main(async () => {
 
     const requestQueue = await Apify.openRequestQueue();
     const failedDataset = await Apify.openDataset('yelp-failed-search');
-    
+
     log.info('Scraping is starting up');
     for (const request of startRequests) {
         log.info('Adding to queue:', { url: request.url, label: request.userData.label });

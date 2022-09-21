@@ -132,10 +132,28 @@ const yelpBusinessReview = (bizId, reviewPageStart = undefined, payload = null) 
     };
 };
 
+const yelpBusinessProps = (bizId, payload = null) => {
+    return {
+        url: `${url}/props`,
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8',
+            'X-Requested-With': 'XMLHttpRequest',
+            'X-Requested-By-React': true,
+        },
+        userData: {
+            label: CATEGORIES.BUSINESS,
+            payload: {
+                ...payload,
+            },
+        },
+    };
+};
+
 module.exports = {
     yelpSearch,
     yelpSearchTermAndLocation,
     yelpBusinessInfo,
+    yelpBusinessProps,
     yelpBusinessReview,
     yelpGraphQl,
     yelpBizPhotos,
