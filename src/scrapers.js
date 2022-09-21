@@ -113,11 +113,16 @@ const createYelpPageHandler = ({
             const { payload } = request.userData;
             const enrichedBusinessInfo = extract.yelpBusinessInfo(json);
 
-            const followup = requests.yelpBusinessReview(payload.business.bizId, null, {
-                ...request.userData.payload,
-                business: nonDestructiveMerge([ request.userData.payload.business, enrichedBusinessInfo ]),
+            // const followup = requests.yelpBusinessReview(payload.business.bizId, null, {
+            //     ...request.userData.payload,
+            //     business: nonDestructiveMerge([ request.userData.payload.business, enrichedBusinessInfo ]),
+            // });
+            // await requestQueue.addRequest(followup);
+
+            await Apify.pushData({
+                ...enrichedBusinessInfo,
+                scrapeFinishedAt: new Date().toISOString(),
             });
-            await requestQueue.addRequest(followup);
         } else if (request.userData.label === CATEGORIES.REVIEW) {
             const payload = (request && request.userData && request.userData.payload) || {};
             const newReviews = extract.yelpBusinessReviews({
