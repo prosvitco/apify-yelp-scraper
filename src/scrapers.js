@@ -122,6 +122,7 @@ const createYelpPageHandler = ({
             // await requestQueue.addRequest(followup);
 
             await Apify.pushData({
+                ...request.userData.payload.business,
                 ...enrichedBusinessInfo,
                 scrapeFinishedAt: new Date().toISOString(),
             });
