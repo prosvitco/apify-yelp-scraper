@@ -71,13 +71,11 @@ const createYelpPageHandler = ({
             for (const searchResultUrl of followupBusinessUrls) {
                 // log.info(`Enqueuing business page url ${searchResultUrl}`);
                 await requestQueue.addRequest(requests.yelpBusinessInfo(searchResultUrl, request.userData.payload));
-                await requestQueue.addRequest(requests.yelpBusinessProps(searchResultUrl, request.userData.payload));
             }
         } else if (request.userData.label === CATEGORIES.BUSINESS) {
             log.info(`[BUSINESS]: Handling business page: ${request.url}`);
             const businessInfo = extract.yelpBusinessPartial($);
-
-            await requestQueue.addRequest(requests[maxImages > 0 ? 'yelpBizPhotos' : 'yelpGraphQl'](request.url, {
+            await requestQueue.addRequest(requests['yelpBusinessProps'](request.url, {
                 ...request.userData.payload,
                 business: nonDestructiveMerge([ request.userData.payload.business, businessInfo ]),
                 scrapeStartedAt: new Date().toISOString(),
@@ -85,7 +83,11 @@ const createYelpPageHandler = ({
         } else if (request.userData.label === CATEGORIES.PROPS) {
             log.info(`[PROPS]: Handling business props page: ${request.url}`);
             const businessProps = extract.yelpBusinessProps(json);
-            console.log(businessProps);
+            await requestQueue.addRequest(requests[maxImages > 0 ? 'yelpBizPhotos' : 'yelpGraphQl'](request.url, {
+                ...request.userData.payload,
+                business: nonDestructiveMerge([ request.userData.payload.business, businessProps ]),
+                scrapeStartedAt: new Date().toISOString(),
+            }));
         } else if (request.userData.label === CATEGORIES.PHOTOS) {
             const { nextUrl, images } = extract.yelpBizPhotos($);
             const currentImages = (request.userData.payload.business.images || []);
