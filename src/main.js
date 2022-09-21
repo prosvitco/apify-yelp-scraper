@@ -28,6 +28,7 @@ Apify.main(async () => {
 
     let startRequests = [];
 
+    log.info('Starting the crawl.');
     // URLs trump search terms
     if (Array.isArray(directUrls) && directUrls.length > 0) {
         log.info('URLs trump search terms');
