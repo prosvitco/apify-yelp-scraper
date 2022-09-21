@@ -32,7 +32,6 @@ const yelpSearchResultUrls = (url, $) => {
  */
 const yelpBusinessPartial = ($) => {
     const bizId = new Set($("meta[name='yelp-biz-id']").map((_, el) => $(el).attr('content')).get());
-    const description = new Set($("meta[property='og:description']").map((_, el) => $(el).attr('content')).get());
 
     if (bizId.size === 0) {
         throw new Error('Page does not contain an Business Id');
@@ -75,7 +74,6 @@ const yelpBusinessPartial = ($) => {
         phone: get(payload, ['bizDetailsPageProps', 'bizContactInfoProps', 'phoneNumber'], otherPhone),
         website,
         images: [],
-        description: [...description.values()][0],
         directUrl,
     };
 };
@@ -125,11 +123,12 @@ const yelpBusinessInfo = (json) => {
 };
 
 const yelpBusinessProps = (json) => {
-    console.log(json);
-    console.log(get(json, 'bizDetailsPageProps.adUnitsAboveReviewProps.adsHeaderText', null));
-    console.log(get(json, ['bizDetailsPageProps', 'adUnitsAboveReviewProps', 'adsHeaderText'], null));
-
-    return [];
+    return {
+        'historyText': get(json, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps', 'historyText'], ''),
+        'specialtiesText': get(json, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps', 'specialtiesText'], ''),
+        'services': get(json, ['bizDetailsPageProps', 'serviceOfferingsProps', 'services'], []),
+        'businessHighlights': get(json, ['bizDetailsPageProps', 'sponsoredBusinessHighlightsProps', 'businessHighlights'], []),
+    }
 };
 
 const yelpBusinessReviews = ({ url, json, scrapeReviewerName, scrapeReviewerUrl }) => {
