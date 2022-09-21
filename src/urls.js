@@ -10,13 +10,14 @@ const BASE_URL_INT = 'https://www.yelp.';
 const completeYelpUrl = (url) => {
     if (!url.includes(BASE_URL_INT)) {
         url = `${BASE_URL}${url.startsWith('/') ? url : `/${url}`}`;
-    } 
+    }
     return url;
 };
 
 const CATEGORIES = {
     SEARCH: 'search',
     BUSINESS: 'business',
+    PROPS: 'props',
     PHOTOS: 'photos',
     GRAPHQL: 'graphql',
     REVIEW: 'review',
@@ -56,6 +57,7 @@ const categorizeUrls = (urls) => {
     categories[CATEGORIES.BUSINESS] = [];
     categories[CATEGORIES.REVIEW] = [];
     categories[CATEGORIES.UNKNOWN] = [];
+    categories[CATEGORIES.PROPS] = [];
     if (Array.isArray(urls)) {
         for (const url of urls) {
             const fixedUrl = completeYelpUrl(url);

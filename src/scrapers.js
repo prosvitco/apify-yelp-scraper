@@ -81,6 +81,8 @@ const createYelpPageHandler = ({
                 business: nonDestructiveMerge([ request.userData.payload.business, businessInfo ]),
                 scrapeStartedAt: new Date().toISOString(),
             }));
+        } else if (request.userData.label === CATEGORIES.PROPS) {
+            console.log(`[PROPS]: Handling props page: ${request.url}`);
         } else if (request.userData.label === CATEGORIES.PHOTOS) {
             const { nextUrl, images } = extract.yelpBizPhotos($);
             const currentImages = (request.userData.payload.business.images || []);
