@@ -126,7 +126,7 @@ const yelpBusinessProps = (json) => {
     return {
         'specialtiesText': get(json, ['bizDetailsPageProps', 'fromTheBusinessProps', 'fromTheBusinessContentProps', 'specialtiesText'], ''),
         'services': get(json, ['bizDetailsPageProps', 'serviceOfferingsProps', 'services'], []).map((service) => service.serviceName),
-        'businessHighlights': get(json, ['bizDetailsPageProps', 'sponsoredBusinessHighlightsProps', 'businessHighlights'], []),
+        'businessHighlights': get(json, ['bizDetailsPageProps', 'sponsoredBusinessHighlightsProps', 'businessHighlights'], []).map((highlight) => highlight.title),
     }
 };
 

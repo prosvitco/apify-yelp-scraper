@@ -113,7 +113,7 @@ const createYelpPageHandler = ({
             const { payload } = request.userData;
             const enrichedBusinessInfo = extract.yelpBusinessInfo(json);
 
-            console.log(`[GRAPHQL]: Handling business info page: ${request.url}`);
+            console.log(json);
 
             // const followup = requests.yelpBusinessReview(payload.business.bizId, null, {
             //     ...request.userData.payload,
@@ -122,7 +122,7 @@ const createYelpPageHandler = ({
             // await requestQueue.addRequest(followup);
 
             await Apify.pushData({
-                ...request.userData.payload.business,
+                ...payload.business,
                 ...enrichedBusinessInfo,
                 scrapeFinishedAt: new Date().toISOString(),
             });
