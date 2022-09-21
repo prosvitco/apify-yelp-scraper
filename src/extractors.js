@@ -45,9 +45,9 @@ const yelpBusinessPartial = ($) => {
     let payload = {};
     const html = $.html();
     const jsonMatch = html.match(/<!--(\{".*bizDetailsPageProps.*?\})-->/);
-    const jsonApollo = html.match(/<!--(\{".*ROOT_QUERY.business.*?\})-->/);
+    const apolloState = html.match(/<script data-apollo-state.*>(.*)<\/script>/);
+    console.log(jsonMatch);
 
-    console.log(jsonApollo[1]);
 
     if (jsonMatch) {
         payload = JSON.parse(jsonMatch[1])?.legacyProps?.bizDetailsProps;
