@@ -46,6 +46,9 @@ const yelpBusinessPartial = ($) => {
     let payload = {};
     const html = $.html();
     const jsonMatch = html.match(/<!--(\{".*bizDetailsPageProps.*?\})-->/);
+
+    console.log(jsonMatch);
+
     if (jsonMatch) {
         payload = JSON.parse(jsonMatch[1])?.legacyProps?.bizDetailsProps;
 
