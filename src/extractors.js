@@ -46,7 +46,8 @@ const yelpBusinessPartial = ($) => {
     const html = $.html();
     const jsonMatch = html.match(/<!--(\{".*bizDetailsPageProps.*?\})-->/);
     const apolloState = html.match(/<script data-apollo-state.*>(.*)<\/script>/);
-    console.log(apolloState);
+    console.log(apolloState[0]);
+    console.log(apolloState[1]);
 
 
     if (jsonMatch) {
