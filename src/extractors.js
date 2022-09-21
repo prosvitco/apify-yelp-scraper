@@ -45,6 +45,10 @@ const yelpBusinessPartial = ($) => {
     let payload = {};
     const html = $.html();
     const jsonMatch = html.match(/<!--(\{".*bizDetailsPageProps.*?\})-->/);
+    const jsonApollo = $('script[data-apollo-state').text();
+
+    console.log(apolloState);
+
     if (jsonMatch) {
         payload = JSON.parse(jsonMatch[1])?.legacyProps?.bizDetailsProps;
 
@@ -66,9 +70,6 @@ const yelpBusinessPartial = ($) => {
         otherPhone = JSON.parse(`{${html.match(/"telephone":".+?"/)[0]}}`).telephone;
     }
     catch { };
-
-    // const apolloState = $('script[data-apollo-state').text;
-    // console.log(apolloState);
 
     return {
         bizId: [...bizId.values()][0],
