@@ -84,7 +84,7 @@ const createYelpPageHandler = ({
             }));
         } else if (request.userData.label === CATEGORIES.PROPS) {
             log.info(`[PROPS]: Handling business props page: ${request.url}`);
-            console.log(json);
+            const businessProps = extract.yelpBusinessProps(json);
         } else if (request.userData.label === CATEGORIES.PHOTOS) {
             const { nextUrl, images } = extract.yelpBizPhotos($);
             const currentImages = (request.userData.payload.business.images || []);

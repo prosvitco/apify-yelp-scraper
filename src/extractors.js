@@ -126,6 +126,8 @@ const yelpBusinessInfo = (json) => {
 
 const yelpBusinessProps = (json) => {
     console.log(json);
+    console.log(get(json, 'bizDetailsPageProps.adUnitsAboveReviewProps.adsHeaderText', null));
+    console.log(get(json, ['bizDetailsPageProps', 'adUnitsAboveReviewProps', 'adsHeaderText'], null));
 
     return [];
 };
