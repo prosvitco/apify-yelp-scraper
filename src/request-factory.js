@@ -133,7 +133,6 @@ const yelpBusinessReview = (bizId, reviewPageStart = undefined, payload = null) 
 };
 
 const yelpBusinessProps = (url, payload = null) => {
-    console.log('yelpBusinessProps', url);
     return {
         url: `${url}/props`,
         headers: {

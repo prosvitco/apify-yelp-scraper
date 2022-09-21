@@ -71,7 +71,6 @@ const createYelpPageHandler = ({
             for (const searchResultUrl of followupBusinessUrls) {
                 // log.info(`Enqueuing business page url ${searchResultUrl}`);
                 await requestQueue.addRequest(requests.yelpBusinessInfo(searchResultUrl, request.userData.payload));
-
                 await requestQueue.addRequest(requests.yelpBusinessProps(searchResultUrl, request.userData.payload));
             }
         } else if (request.userData.label === CATEGORIES.BUSINESS) {
@@ -84,7 +83,7 @@ const createYelpPageHandler = ({
                 scrapeStartedAt: new Date().toISOString(),
             }));
         } else if (request.userData.label === CATEGORIES.PROPS) {
-            console.log(`[PROPS]: Handling props page: ${request.url}`);
+            console.log(request.userData.payload);
         } else if (request.userData.label === CATEGORIES.PHOTOS) {
             const { nextUrl, images } = extract.yelpBizPhotos($);
             const currentImages = (request.userData.payload.business.images || []);
