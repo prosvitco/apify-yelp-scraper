@@ -9,7 +9,7 @@
             "type": "array",
             "description": "Here you can provide a search queries for Yelp bussinesses to scrape. <br /><br /><strong>Choose either of 'Search Terms' or 'Direct URLs'.</strong>",
             "editor": "stringList",
-            "prefill": ["Roof repair"]
+            "prefill": ["Roof cleaning"]
         },
         "locations": {
             "title": "Locations",
