@@ -28,15 +28,12 @@ Apify.main(async () => {
 
     let startRequests = [];
 
-    log.info('Starting the crawl.');
     // URLs trump search terms
     if (Array.isArray(directUrls) && directUrls.length > 0) {
         log.info('URLs trump search terms');
         const urlCategories = categorizeUrls(directUrls);
-        console.log(urlCategories);
         const businessPageRequests = urlCategories[CATEGORIES.BUSINESS].map((url) => requests.yelpBusinessInfo(url));
         const businessPropsRequests = urlCategories[CATEGORIES.PROPS].map((url) => requests.yelpBusinessProps(url));
-        log.info(businessPropsRequests);
         const searchRequests = urlCategories[CATEGORIES.SEARCH].map((url) => requests.yelpSearch(url));
         startRequests = startRequests.concat(businessPageRequests).concat(searchRequests).concat(businessPropsRequests);
     } else if (Array.isArray(searchTerms)) {

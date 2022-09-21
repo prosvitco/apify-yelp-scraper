@@ -70,6 +70,7 @@ const createYelpPageHandler = ({
 
             for (const searchResultUrl of followupBusinessUrls) {
                 // log.info(`Enqueuing business page url ${searchResultUrl}`);
+                console.log(`Enqueuing business page url ${searchResultUrl}`);
                 await requestQueue.addRequest(requests.yelpBusinessInfo(searchResultUrl, request.userData.payload));
             }
         } else if (request.userData.label === CATEGORIES.BUSINESS) {
