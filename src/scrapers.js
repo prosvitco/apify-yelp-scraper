@@ -113,7 +113,7 @@ const createYelpPageHandler = ({
             const { payload } = request.userData;
             const enrichedBusinessInfo = extract.yelpBusinessInfo(json);
 
-            console.log(json.data.business);
+            console.log(json.data);
 
             // const followup = requests.yelpBusinessReview(payload.business.bizId, null, {
             //     ...request.userData.payload,
