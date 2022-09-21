@@ -67,8 +67,8 @@ const yelpBusinessPartial = ($) => {
     }
     catch { };
 
-    const apolloState = $('script[data-apollo-state').text;
-    console.log(apolloState);
+    // const apolloState = $('script[data-apollo-state').text;
+    // console.log(apolloState);
 
     return {
         bizId: [...bizId.values()][0],
