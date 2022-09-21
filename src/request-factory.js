@@ -141,7 +141,7 @@ const yelpBusinessProps = (url, payload = null) => {
             'X-Requested-By-React': true,
         },
         userData: {
-            label: CATEGORIES.BUSINESS,
+            label: CATEGORIES.PROPS,
             payload: {
                 ...payload,
             },
