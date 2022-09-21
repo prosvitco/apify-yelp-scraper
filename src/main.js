@@ -33,8 +33,9 @@ Apify.main(async () => {
         const urlCategories = categorizeUrls(directUrls);
         console.log(urlCategories);
         const businessPageRequests = urlCategories[CATEGORIES.BUSINESS].map((url) => requests.yelpBusinessInfo(url));
+        const businessPropsRequests = urlCategories[CATEGORIES.PROPS].map((url) => requests.yelpBusinessProps(url));
         const searchRequests = urlCategories[CATEGORIES.SEARCH].map((url) => requests.yelpSearch(url));
-        startRequests = startRequests.concat(businessPageRequests).concat(searchRequests);
+        startRequests = startRequests.concat(businessPageRequests).concat(searchRequests).concat(businessPropsRequests);
     } else if (Array.isArray(searchTerms)) {
         for (const searchTerm of searchTerms) {
             for (const location of locations) {
