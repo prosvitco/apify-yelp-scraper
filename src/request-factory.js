@@ -132,7 +132,7 @@ const yelpBusinessReview = (bizId, reviewPageStart = undefined, payload = null) 
     };
 };
 
-const yelpBusinessProps = (bizId, payload = null) => {
+const yelpBusinessProps = (url, payload = null) => {
     return {
         url: `${url}/props`,
         headers: {
