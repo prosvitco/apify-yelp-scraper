@@ -135,7 +135,6 @@ const yelpBusinessReviews = ({ url, json, scrapeReviewerName, scrapeReviewerUrl 
     json.reviews.forEach((review) => {
         if (!reviews.has(review.id)) {
             const $ = load(review.comment.text.replace(/<br>/g, '\n'), { decodeEntities: true, normalizeWhitespace: true });
-            console.log(review);
             reviews.set(review.id, {
                 date: new Date(review.localizedDate).toISOString(),
                 rating: review.rating,
@@ -149,7 +148,8 @@ const yelpBusinessReviews = ({ url, json, scrapeReviewerName, scrapeReviewerUrl 
                 isUsefulCount: review.feedback.counts.useful,
                 isCoolCount: review.feedback.counts.cool,
                 photoUrls: review.photos.map(((photo) => new URL(photo.src, url).toString().replace(/\/[^/]+.jpg/, '/o.jpg'))),
-                reviewerName: scrapeReviewerName ? review.user.markupDisplayName : null,
+                reviewerName: review.user.markupDisplayName,
+                reviewerAvatar: review.user.src,
                 reviewerUrl: scrapeReviewerUrl ? `https://www.yelp.com/${review.user.userUrl}` : null,
                 reviewerReviewCount: review.user.reviewCount,
                 reviewerLocation: review.user.displayLocation,
