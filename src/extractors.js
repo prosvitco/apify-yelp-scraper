@@ -148,7 +148,7 @@ const yelpBusinessReviews = ({ url, json, scrapeReviewerName, scrapeReviewerUrl 
                 isUsefulCount: review.feedback.counts.useful,
                 isCoolCount: review.feedback.counts.cool,
                 photoUrls: review.photos.map(((photo) => new URL(photo.src, url).toString().replace(/\/[^/]+.jpg/, '/o.jpg'))),
-                reviewerName: review.user.markupDisplayName,
+                reviewerName: scrapeReviewerName ? review.user.markupDisplayName : null,
                 reviewerAvatar: review.user.src,
                 reviewerUrl: scrapeReviewerUrl ? `https://www.yelp.com/${review.user.userUrl}` : null,
                 reviewerReviewCount: review.user.reviewCount,
