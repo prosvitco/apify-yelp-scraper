@@ -135,6 +135,7 @@ const yelpBusinessReviews = ({ url, json, scrapeReviewerName, scrapeReviewerUrl 
     json.reviews.forEach((review) => {
         if (!reviews.has(review.id)) {
             const $ = load(review.comment.text.replace(/<br>/g, '\n'), { decodeEntities: true, normalizeWhitespace: true });
+            console.log(review);
             reviews.set(review.id, {
                 date: new Date(review.localizedDate).toISOString(),
                 rating: review.rating,
