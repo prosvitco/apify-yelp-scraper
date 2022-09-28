@@ -43,7 +43,7 @@
             "type": "integer",
             "minimum": 0,
             "unit": "per business",
-            "prefill": 1,
+            "prefill": 10,
             "editor": "number",
             "sectionCaption": "Scraping images and reviews",
             "sectionDescription": "Warning! Reviewer name and Reviewer URL contain personal data. Personal data is protected by GDPR in the European Union and by other regulations around the world. You should not scrape personal data unless you have a legitimate reason to do so. If you're unsure whether your reason is legitimate, consult your lawyers."
@@ -54,7 +54,7 @@
             "description": "How many reviews should be scraped per business",
             "editor": "number",
             "unit": "per business",
-            "prefill": 0,
+            "prefill": 20,
             "minimum": 0,
             "maximum": 999999
         },
@@ -62,7 +62,7 @@
             "title": "Reviewer name",
             "type": "boolean",
             "description": "Extract Reviewer name",
-            "default": false
+            "default": true
         },
         "scrapeReviewerUrl": {
             "title": "Reviewer URL",
@@ -83,7 +83,7 @@
             "title": "Max page retries",
             "type": "integer",
             "description": "How many times a failed request is retried before thrown away. Requests usually failed when blocked by the target site.",
-            "default": 10,
+            "default": 3,
             "minimum": 0,
             "maximum": 100
         }
