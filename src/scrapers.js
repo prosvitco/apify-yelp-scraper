@@ -83,10 +83,10 @@ const createYelpPageHandler = ({
                 const response = await fetch("https://www.findusnow.com/apify/check", requestOptions);
                 const result = await response.json();
                 if (result.success == true) {
-                    console.log(`[Enqueuing] Business page url ${searchResultUrl}`);
+                    log.info(`[Enqueuing]: Business page url ${searchResultUrl}`);
                     await requestQueue.addRequest(requests.yelpBusinessInfo(searchResultUrl, request.userData.payload));
                 } else {
-                    console.log(`[Already Scraped] Business page url ${searchResultUrl}`);
+                    log.debug(`[Already]: Business page url ${searchResultUrl}`);
                 }
             }
         } else if (request.userData.label === CATEGORIES.BUSINESS) {
