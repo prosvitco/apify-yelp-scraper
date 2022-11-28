@@ -70,8 +70,6 @@ const createYelpPageHandler = ({
             }
 
             for (const searchResultUrl of followupBusinessUrls) {
-                console.log(`check ${searchResultUrl}`);
-
                 const checkData = new URLSearchParams();
                 checkData.append("url", searchResultUrl);
                 const requestOptions = {
