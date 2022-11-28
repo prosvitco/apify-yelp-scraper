@@ -86,7 +86,7 @@ const createYelpPageHandler = ({
                     log.info(`[Enqueuing]: Business page url ${searchResultUrl}`);
                     await requestQueue.addRequest(requests.yelpBusinessInfo(searchResultUrl, request.userData.payload));
                 } else {
-                    log.debug(`[Already]: Business page url ${searchResultUrl}`);
+                    log.info(`[Already]: Business page url ${searchResultUrl}`);
                 }
             }
         } else if (request.userData.label === CATEGORIES.BUSINESS) {
