@@ -52,13 +52,14 @@ const createYelpPageHandler = ({
                 params.delete('start');
                 params.append('start', searchResultsFound.toString());
 
-                console.log(`check url: ${url.toString()}`);
+                console.log('check');
+                console.log(url.toString());
+                console.log(request.userData.payload);
 
                 // await requestQueue.addRequest(requests.yelpSearch(url.toString(), {
                 //     ...request.userData.payload,
                 //     searchResultsScraped: previoslyScrapedSearchResults + followupBusinessUrls.length,
                 // }));
-
             } else {
                 log.info(`\tScraped ${previoslyScrapedSearchResults + resultCountToKeep} results in total. No more search results to scrape.`);
                 const { userId, actorTaskId, actorRunId, startedAt } = Apify.getEnv();
