@@ -85,9 +85,8 @@ const createYelpPageHandler = ({
                 const response = await fetch("https://www.findusnow.com/apify/check", requestOptions);
                 const result = await response.json();
                 if (result.success == true) {
-                    console.log("Start Scraping");
-                    // log.info(`Enqueuing business page url ${searchResultUrl}`);
-                    // await requestQueue.addRequest(requests.yelpBusinessInfo(searchResultUrl, request.userData.payload));
+                    console.log(`Enqueuing business page url ${searchResultUrl}`);
+                    await requestQueue.addRequest(requests.yelpBusinessInfo(searchResultUrl, request.userData.payload));
                 } else {
                     console.log("Already Scraped");
                 }
