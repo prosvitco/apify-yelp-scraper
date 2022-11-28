@@ -84,6 +84,7 @@ const createYelpPageHandler = ({
                 const result = await response.json();
                 if (result.success == true) {
                     log.info(`[Enqueuing]: Business page url ${searchResultUrl}`);
+                    
                     await requestQueue.addRequest(requests.yelpBusinessInfo(searchResultUrl, request.userData.payload));
                 } else {
                     log.info(`[Already]: Business page url ${searchResultUrl}`);
