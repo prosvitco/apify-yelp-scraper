@@ -51,10 +51,14 @@ const createYelpPageHandler = ({
                 const params = url.searchParams;
                 params.delete('start');
                 params.append('start', searchResultsFound.toString());
+
+                console.log(`check url: ${url.toString()}`);
+
                 await requestQueue.addRequest(requests.yelpSearch(url.toString(), {
                     ...request.userData.payload,
                     searchResultsScraped: previoslyScrapedSearchResults + followupBusinessUrls.length,
                 }));
+
             } else {
                 log.info(`\tScraped ${previoslyScrapedSearchResults + resultCountToKeep} results in total. No more search results to scrape.`);
                 const { userId, actorTaskId, actorRunId, startedAt } = Apify.getEnv();
