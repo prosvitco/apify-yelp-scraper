@@ -51,15 +51,10 @@ const createYelpPageHandler = ({
                 const params = url.searchParams;
                 params.delete('start');
                 params.append('start', searchResultsFound.toString());
-
-                console.log('check');
-                console.log(url.toString());
-                console.log(request.userData.payload);
-
-                // await requestQueue.addRequest(requests.yelpSearch(url.toString(), {
-                //     ...request.userData.payload,
-                //     searchResultsScraped: previoslyScrapedSearchResults + followupBusinessUrls.length,
-                // }));
+                await requestQueue.addRequest(requests.yelpSearch(url.toString(), {
+                    ...request.userData.payload,
+                    searchResultsScraped: previoslyScrapedSearchResults + followupBusinessUrls.length,
+                }));
             } else {
                 log.info(`\tScraped ${previoslyScrapedSearchResults + resultCountToKeep} results in total. No more search results to scrape.`);
                 const { userId, actorTaskId, actorRunId, startedAt } = Apify.getEnv();
@@ -75,6 +70,7 @@ const createYelpPageHandler = ({
 
             for (const searchResultUrl of followupBusinessUrls) {
                 // log.info(`Enqueuing business page url ${searchResultUrl}`);
+                console.log(`check ${searchResultUrl}`);
                 await requestQueue.addRequest(requests.yelpBusinessInfo(searchResultUrl, request.userData.payload));
             }
         } else if (request.userData.label === CATEGORIES.BUSINESS) {
