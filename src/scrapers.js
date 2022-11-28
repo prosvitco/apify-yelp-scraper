@@ -72,11 +72,14 @@ const createYelpPageHandler = ({
             for (const searchResultUrl of followupBusinessUrls) {
                 console.log(`check ${searchResultUrl}`);
 
+                const checkData = new URLSearchParams();
+                checkData.append("url", searchResultUrl);
                 const requestOptions = {
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
                     method: 'POST',
-                    body: JSON.stringify({
-                        "url": searchResultUrl
-                    })
+                    body: checkData
                 };
 
                 const response = await fetch("https://www.findusnow.com/apify/check", requestOptions);
