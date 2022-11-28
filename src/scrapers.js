@@ -3,6 +3,7 @@ const { CATEGORIES } = require('./urls');
 const extract = require('./extractors');
 const requests = require('./request-factory');
 const { nonDestructiveMerge } = require('./utils');
+const fetch = require('node-fetch');
 
 const { log } = Apify.utils;
 
